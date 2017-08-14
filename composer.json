@@ -19,6 +19,9 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Cethyworks\\TwigSwiftMessage\\": "" }
+        "psr-4": { "Cethyworks\\TwigSwiftMessage\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Cethyworks\\TwigSwiftMessage\\Tests\\": "tests/" }
     }
 }

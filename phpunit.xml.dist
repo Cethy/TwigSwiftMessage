@@ -14,14 +14,14 @@
     </php>
 
     <testsuites>
-        <testsuite name="twig-swift-message">
-            <directory>Tests</directory>
+        <testsuite name="project">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>Message</directory>
+            <directory>src</directory>
         </whitelist>
     </filter>
 </phpunit>
