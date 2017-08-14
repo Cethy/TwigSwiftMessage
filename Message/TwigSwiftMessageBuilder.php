@@ -5,6 +5,7 @@ namespace Cethyworks\TwigSwiftMessage\Message;
 use Twig_Environment;
 use Twig_TemplateWrapper;
 use Swift_Message;
+use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 class TwigSwiftMessageBuilder
 {
@@ -13,13 +14,16 @@ class TwigSwiftMessageBuilder
      */
     protected $twig;
 
+    protected $cssToInlineStyles;
+
     /**
      * TwigSwiftMessageBuilder constructor.
      * @param Twig_Environment $twig
      */
     public function __construct(Twig_Environment $twig)
     {
-        $this->twig = $twig;
+        $this->twig              = $twig;
+        $this->cssToInlineStyles = new CssToInlineStyles();
     }
 
     /**
@@ -35,10 +39,15 @@ class TwigSwiftMessageBuilder
         $subject  = trim($this->getBlock('subject', $template, $templateParameters));
         $bodyHtml = trim($this->getBlock('body_html', $template, $templateParameters));
         $bodyTxt  = trim($this->getBlock('body_txt', $template, $templateParameters));
+        $cssStyle = trim($this->getBlock('style', $template, $templateParameters));
 
         $message = new Swift_Message($subject);
 
         if(strlen($bodyHtml)) {
+            if(strlen($cssStyle)) {
+                $bodyHtml = $this->cssToInlineStyles->convert($bodyHtml, $cssStyle);
+            }
+
             $message->setBody($bodyHtml, 'text/html');
 
             if(strlen($bodyTxt)) {

@@ -1,7 +1,15 @@
 {% block subject %}{{ foo }} subject{% endblock subject %}
 
+{% block style %}.baz{color:red;}{% endblock style %}
+
 {% block body_html %}
-{{ foo }}<br>bar
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<body>
+<p>bar<br></p>
+<p class="baz" style="color: red;">bar</p>
+</body>
+</html>
 {% endblock body_html %}
 
 {% block body_txt %}

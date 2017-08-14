@@ -1,7 +1,7 @@
 Cethyworks/TwigSwiftMessage
 ===
 
-Provides a Swift_Message builder using twig.
+Build `Swift_Message`s with twig and optionally inline the css with [CssToInlineStyles](https://github.com/tijsverkoyen/CssToInlineStyles). 
 
 [![CircleCI](https://circleci.com/gh/Cethy/TwigSwiftMessage/tree/master.svg?style=shield)](https://circleci.com/gh/Cethy/TwigSwiftMessage/tree/master)
 
@@ -16,9 +16,11 @@ Provides a Swift_Message builder using twig.
  
     {% block subject %}subject{% endblock subject %}
     
+    {% block style %}.baz {color:red;}{% endblock style %}
+    
     {% block body_html %}
         {{ foo }}<br>
-        bar
+        <p class="baz">bar</p>
     {% endblock body_html %}
     
     {% block body_txt %}

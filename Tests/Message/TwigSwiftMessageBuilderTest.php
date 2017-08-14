@@ -39,7 +39,11 @@ class TwigSwiftMessageBuilderTest extends TestCase
                 'full.html.twig',
                 ['foo' => 'bar'],
                 (new Swift_Message('bar subject'))
-                    ->setBody('bar<br>bar', 'text/html')
+                    ->setBody('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html><body>
+<p>bar<br></p>
+<p class="baz" style="color: red;">bar</p>
+</body></html>', 'text/html')
                     ->addPart("bar\nbar", 'text/plain')
             ],
         ];
@@ -68,7 +72,7 @@ class TwigSwiftMessageBuilderTest extends TestCase
     protected function getCleanedMessageString(Swift_Message $message)
     {
         /*
-        Message-ID: <882d18b1a3060a9c7ff11b45c8619a6e@swift.generated>
+        MessageTemplate-ID: <882d18b1a3060a9c7ff11b45c8619a6e@swift.generated>
         Date: Fri, 21 Jul 2017 19:01:33 +0200
         Subject: bar subject
         From:
@@ -94,7 +98,7 @@ class TwigSwiftMessageBuilderTest extends TestCase
         */
 
         $text = $message->toString();
-        // remove first line (Message-ID: <882d18b1a3060a9c7ff11b45c8619a6e@swift.generated>)
+        // remove first line (MessageTemplate-ID: <882d18b1a3060a9c7ff11b45c8619a6e@swift.generated>)
         $text = substr( $text, strpos($text, "\n")+1 );
         // remove second line (Date: Fri, 21 Jul 2017 19:01:33 +0200)
         $text = substr( $text, strpos($text, "\n")+1 );
